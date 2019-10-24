@@ -2,25 +2,57 @@ window.onload = function(){
     init();
 }
 
+let comparedSquares = [];
+
 function init(){
     console.log("Zeppo initialized");
-
-    playingBoardElement = document.getElementsByClassName("playing-board");
-    squareElement = document.getElementsByClassName("square");
-
-    let square = document.getElementsByClassName("sqaure");
-    let squares = [...square]
-
 
     let movesCount = 0;
     let movesElement = document.querySelector("score-moves");
 
-    let compare = document.getElementsByClassName("found");
+    clearArray(comparedSquares);
 
-    let openSquares = [];
+    shuffleSquares();
+    resetSquareState();
 
-    squares = shuffleSquares();
+    $(".square").on("mouseup", function(){
+        (this).children[0].classList.toggle("hidden");
+        comparedSquares.push((this).children[0]);
+
+        console.log(comparedSquares);
+        
+        if(comparedSquares.length == 2){
+            if(comparedSquares[0].isEqualNode(comparedSquares[1])){
+                console.log("foud");
+                comparedSquares.forEach(function(e){
+                    e.classList.add("found");
+                    e.classList.remove("hidden");
+                });
+                clearArray(comparedSquares);
+            }else{
+                console.log("nah");
+                setTimeout(function(){
+                    comparedSquares.forEach(function(e){
+                        e.classList.add("hidden");
+                    });
+                    clearArray(comparedSquares);
+                },1000);
+            }
+        }
+    });
 }
+
+function restart(){
+    shuffleSquares();
+    resetSquareState();
+    clearArray(comparedSquares);
+}
+
+function clearArray(array) {
+    while (array.length) {
+      array.pop();
+    }
+  }
 
 class Target {
     constructor(target, target2) {
@@ -29,8 +61,6 @@ class Target {
     }
 }
 
-let reverseSet = [];
-
 function shuffleSquares(){
     console.log("shuffle them Zeppis");
     var squares = $(".square");
@@ -38,5 +68,14 @@ function shuffleSquares(){
         var target = Math.floor(Math.random() * squares.length -1) + 1;
         var target2 = Math.floor(Math.random() * squares.length -1) +1;
         squares.eq(target).before(squares.eq(target2));
+    }
+}
+
+function resetSquareState(){
+    console.log("reset zeppi state");
+    var squares = $(".square");
+    for(var i = 0; i < squares.length; i++){
+        squares[i].children[0].classList.remove("selected", "found", "hidden");
+        squares[i].children[0].classList.add("hidden");
     }
 }

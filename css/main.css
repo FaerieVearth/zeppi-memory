@@ -53,7 +53,6 @@ header{
 .playing-board .square {
     flex: 1 0 12%; 
 	margin: 10px;
-	background: #141214;;
 	font-size: 0;
 	color: #ffffff;
 	border-radius: 5px;
@@ -104,39 +103,18 @@ li.zeppi-pink {
     background-color: pink !important;
 }
 
-.playing-board .square .selected{
-    transform: rotateY(0);
-	background: #02b3e4;
-	cursor: default;
-	animation-name: flipInY;
-	-webkit-backface-visibility: visible !important;
-	backface-visibility: visible !important;
-	animation-duration: .75s;
+.selected{
 
 }
 
-.playing-board .square .found{
-    cursor: default;
-	background: #E5F720;
-	font-size: 33px;
-	animation-name: rubberBand;
-	-webkit-backface-visibility: visible !important;
-	backface-visibility: visible !important;
-	animation-duration: .75s;
+.found{
+    cursor: none;
 }
 
-.playing-board .square .return{
-    animation-name: pulse;
-	-webkit-backface-visibility: visible !important;
-	backface-visibility: visible !important;
-	animation-duration: .75s;
-	background: #e2043b;
+.hidden{
+    visibility: hidden;
 }
 
-.playing-board .square .disable{
-    pointer-events: none;
-	opacity: 0.9;
-}
 
 
 
