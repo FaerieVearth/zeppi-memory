@@ -16,8 +16,17 @@ function init(){
     resetSquareState();
 
     $(".square").on("mouseup", function(){
-        (this).children[0].classList.toggle("hidden");
-        comparedSquares.push((this).children[0]);
+        let selectedElement = (this).children[0];
+        comparedSquares.forEach(function(e){
+            if(e === selectedElement){
+                return;
+            }
+        });
+
+        if (comparedSquares.length < 2){
+            selectedElement.classList.toggle("hidden");
+            comparedSquares.push(selectedElement);
+        }
 
         console.log(comparedSquares);
         
