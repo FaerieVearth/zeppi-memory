@@ -76,7 +76,7 @@ function init(){
                     });
                     clearArray(comparedSquares);
                     block = false;
-                },1000);
+                },500);
                 
             }
         }
