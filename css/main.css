@@ -67,7 +67,7 @@ img {
     height: 156px;
     width: 156px;
     opacity: 0.6;
-    
+    cursor: pointer;
     padding: 10px;
 }
 
