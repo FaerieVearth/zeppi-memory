@@ -9,6 +9,7 @@ let startFlag = false;
 let numberOfPairsLeft;
 let movesElement;
 let gameOver = false;
+let block = false;
 
 
 function init(){
@@ -24,7 +25,7 @@ function init(){
     resetSquareState();
 
     $(".square").on("click", function(el){
-        if(gameOver){
+        if(gameOver || block){
             return;
         }
         if(!startFlag){
@@ -50,6 +51,7 @@ function init(){
         }
         
         if(comparedSquares.length == 2){
+            block = true;
             if(comparedSquares[0].isEqualNode(comparedSquares[1])){
                 movesCount++;
                 movesElement.innerHTML = "Moves: " + movesCount;
@@ -64,7 +66,7 @@ function init(){
                     stopTimer();
                     gameOver = true;
                 }
-
+                block = false;
             }else{
                 movesCount++;
                 movesElement.innerHTML = "Moves: " + movesCount;
@@ -73,7 +75,9 @@ function init(){
                         e.classList.add("hidden");
                     });
                     clearArray(comparedSquares);
+                    block = false;
                 },1000);
+                
             }
         }
     });
